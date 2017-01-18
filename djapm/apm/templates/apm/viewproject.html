@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>APM - Project</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		
+		<link rel="stylesheet" href="/static/apm/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/apm/css/style.css">
+		<link rel="stylesheet" href="/static/apm/css/sidebar.css">
+		<link rel="stylesheet" href="/static/apm/css/button.css">
+		<link rel="stylesheet" href="/static/apm/css/bootstrap-datepicker.min.css">
+		
+		
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
+		<style>
+			.apm-nav-brand-1{
+				padding: 15px!important;
+				font-size: 15px!important;
+				margin: 0!important;
+				padding-left: 8px!important;
+			}
+			.apm-dropdown-projects{
+				margin-left: -98px!important;
+				margin-top: 50px!important;
+				z-index:99999999;
+			}
+			.apm-add-proj-descr-box {
+			    border: 1px solid #BBB9B9;
+			    padding: 20px 20px;
+			    background: #f8f8f8;
+			}
+			.error{
+			color:red;
+			display: inline-block;
+    		max-width: 100%;
+    		margin-bottom: 5px;
+    		font-weight: 700;
+			}
+			
+		</style>
+		
+	
+		
+	</head>
+<body>
+    <nav class="navbar navbar-default no-margin nav-apm">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header fixed-brand">
+                    
+					<!-- Menu Toggle -->
+					<i class="fa fa-bars fa-2x collapse in" data-toggle="collapse" id="menu-toggle-2" aria-hidden="true"></i>
+					
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".apm-navbar" aria-expanded="false" aria-controls="navbar">
+					  <span class="sr-only">Toggle navigation</span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					</button>
+					
+					<!-- Project Name in dropdown -->
+					<span class="dropdown">
+						<a class="navbar-brand apm-nav-brand-1" href="/apm/project"  role="button" aria-haspopup="true" aria-expanded="false">View All Projects<span class="caret"></span></a>
+					</span>
+                </div><!-- navbar-header-->
+ 
+                <div class="collapse navbar-collapse apm-navbar" id="bs-example-navbar-collapse-1">
+                            <!--  <ul class="nav navbar-nav">
+                                <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<i class="fa fa-share-alt"></i> SOCIAL MEDIA
+										<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+										  <li><a href="#"><i class="fa fa-facebook-official"></i> Facebook</a></li>
+										  <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+										  <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+										</ul>
+									  </li>
+									  
+									  
+									  <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<i class="fa fa-sticky-note"></i> DOCUMENTS
+										<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+										  <li><a href="#"><i class="fa fa-file"></i> Document 1</a></li>
+										  <li><a href="#"><i class="fa fa-file"></i> Document 2</a></li>
+										  <li><a href="#"><i class="fa fa-file"></i> Document 3</a></li>
+										</ul>
+									  </li>
+									  
+									  <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ISSUES
+										<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+										  <li><a href="#"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Issue 1</a></li>
+										  <li><a href="#"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Issue 2</a></li>
+										  <li><a href="#"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Issue 3</a></li>
+										</ul>
+									  </li>
+									  
+                            </ul>
+							
+							-->
+							
+							<ul class="nav navbar-nav navbar-right nav-desktop">
+									<li class="search-field-box">
+										<i class="fa fa-search search-icon"></i><input type="text" class="form-control search-field" placeholder="Search...">
+									</li>
+									 
+ 									  <li class="dropdown">
+										<a href="#" class="dropdown-toggle user-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										
+										Hi , {{userName}}
+										{%if blob%}
+										<img src="/view_photo?photo_key={{blob}}" class="apm-profile-thumb"> </a>
+										{%else%}
+										<i class="fa fa-user fa-3x"></i></a>
+										{%endif%}
+										<ul class="dropdown-menu multi-level menu-user">
+										{%if approle == "Admin"%}
+										  <li><a href="/admin/dashboard"><i class="fa fa-refresh"></i>Switch Role</a></li>
+										  {%endif%}
+										  <li><a href="/profile"><i class="fa fa-user"></i> Profile</a></li>
+									      <li class="dropdown-submenu">
+													<a href="#"><i class="fa fa-caret-left arrow-left"></i><i class="fa fa-cog"></i> Settings</a>
+													<ul class="dropdown-menu submenu-list">
+													  <li><a href="#"><i class="fa fa-bell"></i> Notifications</a></li>
+													  <li><a href="#"><i class="fa fa-link"></i> Linked Accounts</a></li>
+													  <li><a href="#"><i class="fa fa-trash"></i> Clear History</a></li>
+													  <li><a href="#"><i class="fa fa-share-square"></i> Share Query</a></li>
+													  <li><a href="#"><i class="fa fa-certificate"></i> Assistance</a></li>
+													</ul>
+										  </li>
+										  <li><a href="#"><i class="fa fa-question-circle"></i> Help</a></li>
+										  <li role="separator" class="divider"></li>
+										  <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+										</ul>
+									  </li>
+									</ul>
+							
+                </div><!-- bs-example-navbar-collapse-1 -->
+    </nav>
+	
+	
+    <div>
+		
+		
+		
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+					
+						<h2 class="apm-all-reports-heading">Project</h2>
+						
+						<hr>
+						
+					<!-- Main add project content starts-->
+					<div id="tb">
+						<ul class="nav nav-tabs">
+							<li id="prj-details"class="active"><a href="#proj-details" class="apm-add-proj-tab-title">Project Details</a></li>
+							<li id="prj-team"><a href="#proj-team" class="apm-add-proj-tab-title">Project Team</a></li>
+							<li><a href="#estimation-guidelines" class="apm-add-proj-tab-title">Estimation Guidelines</a></li>
+						</ul>
+                      </div>
+						<div class="tab-content">
+							
+							<!-- Project Details -->
+							<div id="proj-details" class="tab-pane fade in active">
+								<div class="row">
+									<div  class="col-md-4 apm-add-proj-descr-box">
+										<form role="form" id="prj">
+										
+											<!-- Project Title -->
+											<div  class="form-group">
+												<label class="apm-landing-reg-label">Project Title</label>
+											
+												<!-- <input name="proj_name" type="text" class="form-control apm-landing-textbox-reg" value= {{ project.name }}> -->
+												<textarea name="proj_name" class="form-control apm-landing-textbox-reg apm-text-area" rows="1"> {{project.name}} </textarea>
+											</div>
+											
+											<!-- Project Description -->
+											<div class="form-group">
+												<label class="apm-landing-reg-label">Project Description</label>
+												<textarea name="proj_desc" class="form-control apm-landing-textbox-reg apm-text-area" rows="4"> {{project.description}} </textarea>
+											</div>
+											<div class="row">
+												<!-- Start Date -->
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="apm-landing-reg-label">Start Date</label>
+														<input name="proj_start" type="text" class="form-control apm-landing-textbox-reg datepicker" value="{{project.startDate|date:'m/d/Y'}}" readonly="true" id="pr_start">
+														<i class="fa fa-calendar datepicker-cal open-datetimepicker" aria-hidden="true"></i>
+													</div>
+												</div>
+												
+												<!-- End Date -->
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="apm-landing-reg-label">End Date</label>
+														<input name="proj_end" type="text" class="form-control apm-landing-textbox-reg datepicker" value = "{{project.endDate|date:'m/d/Y'}}" readonly="true" id="pr_end">
+														<i class="fa fa-calendar datepicker-cal open-datetimepicker1" aria-hidden="true"></i>
+													</div>
+												</div>
+												
+											</div>
+										</form>
+									</div>
+									<div class="col-md-8">
+									</div>
+								</div>
+								<div class="apm-add-proj-btnbox">
+							<button class="apm-add-proj-btn" id="submit">EDIT</button>
+							<button class="apm-add-proj-btn" id="cancel">CANCEL</button>
+						</div>
+							</div>
+							<!-- Project Details ENDS-->
+							
+							
+							<!-- Project Team -->
+							<div id="proj-team" class="tab-pane fade">
+								<div class="apm-nomember-box" style="display:none;">
+									<h4 class="apm-nomember-text">You have no members in your project. <br>Please add members by clicking Add Member button.</h4>
+									<button class="apm-addmember-btn" id="apm-addmember-btn">Add Member</button>
+								</div>
+								
+								<div class="apm-member-listing-box">
+									<div class="row">
+										<div class="col-md-8">
+											
+											<div class="apm-nomember-box-listing">
+												<button class="apm-addmember-btn" id="apm-addmember-btn2">Add Member</button>
+											</div>
+											
+											<div class="table-responsive">
+												<table id="memlist" class="table table-bordered apm-member-listing-table">
+													<thead>
+													  <tr>
+														<th>Member Name</th>
+														<th>Role</th>
+														<th>Action</th>
+													  </tr>
+													</thead>
+													<tbody>
+													{% for mem in projmem %}
+													  <tr id="{{mem.key.id}}">
+														<td>{{ mem.userid.get.name }} {{ mem.userid.get.last_name }}</td>
+														<td>{{ mem.userRole }}</td>
+														<td>
+															<i class="fa fa-pencil apm-add-proj-edit" aria-hidden="true" title="Edit"></i>
+															{%if product_owner%}
+															
+															<a href="/apm/project/deleteMember?key={{mem.key.urlsafe}}" data-toggle="modal" data-target="#delete-teammember-modal">
+															<i id="deletemember" class="fa fa-trash apm-add-proj-delete" aria-hidden="true" title="Delete"></a></i>
+															
+															
+															{%endif%}
+														</td>
+													  </tr>
+													   {%endfor%}
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-4">
+											
+										</div>
+									</div>
+								
+								</div>
+								
+							</div>
+							<!-- Project Team ENDS -->
+							
+							
+							<!-- Project estimation-guidelines -->
+							<div id="estimation-guidelines" class="tab-pane fade">
+								<div class="apm-member-listing-box">
+									<div class="row">
+										<div class="col-md-8">
+											
+											<div class="apm-nomember-box-listing">
+												<button class="apm-addmember-btn" id="apm-addestimates-btn">Add Estimates</button>
+											</div>
+											
+											<div class="table-responsive">
+												<table id="estilist" class="table table-bordered apm-member-listing-table">
+													<thead>
+													  <tr>
+														<th>Complexity</th>
+														<th>Complexity Points</th>
+														<th>Estimated Efforts</th>
+														<th>Action</th>
+													  </tr>
+													</thead>
+													<tbody>
+													{% for esti in estimation %}
+												
+													  <tr id="{{esti.id}}">
+														<td>{{ esti.task_complexity }}</td>
+														<td>{{ esti.task_complexity_point }}</td>
+														<td>{{ esti.task_estimated_efforts }}</td>
+														<td>
+															<i class="fa fa-pencil apm-add-esti-edit" aria-hidden="true" title="Edit"></i>
+														<!-- 	<i id="delestimate" class="fa fa-trash apm-add-esti-delete" aria-hidden="true" title="Delete"></i> -->
+														</td>
+													  </tr>
+													
+													  {%endfor%}
+													 
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-4">
+											
+										</div>
+									</div>
+								
+								</div>
+							</div>
+							<!-- Project estimation-guidelines -->
+							
+							
+						</div>
+						
+						<hr>
+						
+						
+					<!-- Main add project content ENDS-->
+						
+						
+                    </div> <!-- .col-lg-12 ends -->
+                </div>
+            </div> <!-- .container ends -->
+        </div>
+        <!-- /#page-content-wrapper ENDS -->
+		
+    </div>
+    <!-- /#wrapper -->
+  
+		
+		<!-- Add Team Members Starts -->
+			<div id="add-member-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+			  <div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content add-task-modal-content">
+				  <div class="modal-header add-task-modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title add-task-modal-heading">Add Team Member</h4>
+				  </div>
+					<div class="modal-body user-management-body">
+							<div class="row">
+								<div class="col-md-2">
+								</div>
+								
+								<div class="col-md-8">
+										<form role="form" id="members">
+											  <!-- Team Mamber Name --> 
+											  <div  class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Member Name</label>
+												<select id="memselect" class="form-control apm-landing-textbox-reg apm-modal-textbox">
+													<option>- Select -</option>
+													{% for users in userslist %}
+													
+													<option  value= "{{ users.key.id }}"> {{ users.name }} {{ users.last_name}}</option>
+													
+													{%endfor%}
+												</select>
+											  </div>
+											  
+											  <!-- Team Mamber Role --> 
+											  <div class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Role</label>
+												<select id="memrole" class="form-control apm-landing-textbox-reg apm-modal-textbox">
+													<option>- Select -</option>
+													{% for role in roles %}
+													<option  value= "{{ role.key.id }}"> {{ role.role }}</option>
+													{%endfor%}
+												</select>
+											  </div>
+											  
+											
+										</form>
+										<div class="error" id="date_error"></div>
+								</div>	
+								<div class="col-md-2">
+								</div>		
+							</div>
+							
+				  </div>
+				  <div class="modal-footer add-task-modal-footer">
+					<button type="button" class="add-task-btn-modal" data-dismiss="modal" id="addmember">Add</button>
+					<a href="#" class="cancel-task-btn-modal" data-dismiss="modal">Cancel</a>
+				  </div>
+				</div>
+
+			  </div>
+			</div>
+	<!-- Add Team Members Modal Ends -->
+	
+	
+	<!-- Edit Team Members Starts -->
+			<div id="edit-member-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+			  <div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content add-task-modal-content">
+				  <div class="modal-header add-task-modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title add-task-modal-heading">Edit Team Member</h4>
+				  </div>
+					<div class="modal-body user-management-body">
+							<div class="row">
+								<div class="col-md-2">
+								</div>
+								
+								<div class="col-md-8">
+										<form role="form" id="editmembers">
+										{% csrf_token %}
+											  <!-- Team Mamber Name --> 
+											  <div  class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Member Name</label>
+												<select name="memsel"id="editmemselect" class="form-control apm-landing-textbox-reg apm-modal-textbox" disabled>
+													
+												</select>
+											  </div>
+											  
+											  <!-- Team Mamber Role --> 
+											  <div class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Role</label>
+												<select id="editmemrole" class="form-control apm-landing-textbox-reg apm-modal-textbox">
+													<option>- Select -</option>
+													{% for role in roles %}
+													<option  value= "{{ role.key.id }}"> {{ role.role }}</option>
+													{%endfor%}
+												</select>
+												
+											  </div>
+											 <div class="error" id="date_error1"></div> 
+											
+										</form>
+										
+								</div>	
+								<div class="col-md-2">
+								</div>		
+							</div>
+							
+				  </div>
+				  <div class="modal-footer add-task-modal-footer">
+					<button type="button" class="add-task-btn-modal" data-dismiss="modal" id="editmember">Edit</button>
+					<a href="#" class="cancel-task-btn-modal" data-dismiss="modal">Cancel</a>
+				  </div>
+				</div>
+
+			  </div>
+			</div>
+	<!-- Edit Team Members Modal Ends -->
+	
+	
+	<!-- Add Estimation Timelines Starts -->
+			<div id="add-estimation-timeline-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+			  <div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content add-task-modal-content">
+				  <div class="modal-header add-task-modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title add-task-modal-heading">Add Estimation Guidelines</h4>
+				  </div>
+					<div class="modal-body user-management-body">
+							<div class="row">
+								<div class="col-md-2">
+								</div>
+								
+								<div class="col-md-8">
+										<form role="form" id="addes">
+											{% csrf_token %}
+											
+											<input name="projid" id="projid" type="hidden" value="{{project_id}}">
+											  <!-- Complexity --> 
+											  <div class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Complexity</label>
+												<input name="name" id="complexity" type="text" class="form-control apm-landing-textbox-reg apm-modal-textbox">
+											  </div>
+											  
+											  <!-- Complexity Points --> 
+											  <div class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Complexity Points</label>
+												<input name="pts" id="points" type="text" class="form-control apm-landing-textbox-reg apm-modal-textbox">
+											  </div>
+											  
+											  <!-- Estimated Efforts --> 
+											  <div class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Estimated Efforts</label>
+												<input name="eff" id="efforts" type="text" class="form-control apm-landing-textbox-reg apm-modal-textbox">
+											  </div>
+											
+										</form>
+										
+								</div>	
+								<div class="col-md-2">
+								</div>		
+							</div>
+							
+				  </div>
+				  <div class="modal-footer add-task-modal-footer">
+					<button type="button" class="add-task-btn-modal" data-dismiss="modal" id="addestimates" >Add</button>
+					<a href="#" class="cancel-task-btn-modal" data-dismiss="modal">Cancel</a>
+				  </div>
+				</div>
+
+			  </div>
+			</div>
+	<!-- Add Estimation Timelines Modal Ends -->
+	
+	
+	<!-- Edit Estimation Timelines Starts -->
+			<div id="edit-estimation-timeline-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+			  <div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content add-task-modal-content">
+				  <div class="modal-header add-task-modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title add-task-modal-heading">Edit Estimation Guidelines</h4>
+				  </div>
+					<div class="modal-body user-management-body">
+							<div class="row">
+								<div class="col-md-2">
+								</div>
+								
+								<div class="col-md-8">
+										<form role="form" id="edites">
+										{% csrf_token %}
+										<input name="projid" id="projid" type="hidden" value="{{project_id}}">
+										<input name="estimate_id" id="estimate_id" type="hidden" value="">
+											  <!-- Complexity --> 
+											  <div class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Complexity</label>
+												<input name="new_name" id="editcomplexity" type="text" class="form-control apm-landing-textbox-reg apm-modal-textbox">
+											  </div>
+											  
+											  <!-- Complexity Points --> 
+											  <div class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Complexity Points</label>
+												<input name="pts" id="editpoints" type="text" class="form-control apm-landing-textbox-reg apm-modal-textbox">
+											  </div>
+											  
+											  <!-- Estimated Efforts --> 
+											  <div class="form-group task-form-group">
+												<label class="apm-landing-reg-label">Estimated Efforts</label>
+												<input name="eff" id="editefforts" type="text" class="form-control apm-landing-textbox-reg apm-modal-textbox">
+											  </div>
+											
+										</form>
+										
+								</div>	
+								<div class="col-md-2">
+								</div>		
+							</div>
+							
+				  </div>
+				  <div class="modal-footer add-task-modal-footer">
+					<button type="button" class="add-task-btn-modal" data-dismiss="modal" id="editestimates" >Edit</button>
+					<a href="#" class="cancel-task-btn-modal" data-dismiss="modal">Cancel</a>
+				  </div>
+				</div>
+
+			  </div>
+			</div>
+	<!-- Edit Estimation Timelines Modal Ends -->
+		
+		<!-- Delete Team Member Modal Starts -->
+			<div id="delete-teammember-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+			  <div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content add-task-modal-content">
+				  
+				</div>
+
+			  </div>
+			</div>
+	<!-- Create Issue Modal Ends -->
+		
+		
+		<script src="/static/apm/js/jquery.js"></script>
+		<script src="/static/apm/js/bootstrap.min.js"></script>
+		<script src="/static/apm/js/side-menu.js"></script>
+		<script src="/static/apm/js/bootstrap-datepicker.min.js"></script>
+		<script src="/static/apm/js/main.js"></script>
+		<script src="/static/apm/js/jquery.validate.min.js"></script>
+		<script>
+				$(document).ready(function(){
+					
+					
+		  				
+				
+					$(".nav-tabs a").click(function(){
+						console.log("this is"+this)
+						$(this).tab('show');
+					});
+					
+					$('.form-group').find('.open-datetimepicker').on('click', function(){
+					    $('#pr_start').trigger('focus');
+					});
+					
+					$('.form-group').find('.open-datetimepicker1').on('click', function(){
+					    $('#pr_end').trigger('focus');
+					});
+					
+					if(window.location.hash.substr(1) == "proj-team")
+						{
+						console.log("the has value is"+window.location.hash.substr(1));
+						$(window.location).tab('show');	
+						$('#prj-details').removeClass('active');
+						$('#prj-team').addClass('active');
+						}
+					
+					// validation
+					
+					var est_validator=   $("#addes").validate({
+		      rules: {
+		    	  name: 
+		    	  {
+		           		 required: true
+		          },
+		          pts: 
+		          {
+			      		 required: true,
+			      		 number:true
+			      },
+			 
+				  eff: 
+				  {
+						 required: true,
+						 number:true
+						
+					
+				  }
+				 
+	   
+		         },
+		         messages: 
+		         {
+		        	 name: 
+		           {
+		             required: "Please enter a name."
+		           },
+		           pts: 
+		           {
+		             required: "Please enter a valid number for points."
+		           },
+		       
+		           eff: 
+			       {
+			             required: "Please enter a valid number for efforts."
+			       }
+			     
+		         }
+		     });
+
+					
+					// end of validation
+					
+			// edit validation
+					
+					var est_validator=   $("#edites").validate({
+		      rules: {
+		    	  name: 
+		    	  {
+		           		 required: true
+		          },
+		          pts: 
+		          {
+			      		 required: true,
+			      		 number:true
+			      },
+			 
+				  eff: 
+				  {
+						 required: true,
+						 number:true
+						
+					
+				  }
+				 
+	   
+		         },
+		         messages: 
+		         {
+		        	 name: 
+		           {
+		             required: "Please enter a name."
+		           },
+		           pts: 
+		           {
+		             required: "Please enter a valid number for points."
+		           },
+		       
+		           eff: 
+			       {
+			             required: "Please enter a valid number for efforts."
+			       }
+			     
+		         }
+		     });
+
+					
+					// end of  edit validation		
+					
+					$('.datepicker').datepicker({
+						format: 'mm/dd/yyyy',
+						//startDate: '0d'
+					});
+					
+					
+					
+					$(".cancel-task-btn-modal").click(function(e) {
+						$("#addes").trigger('reset');
+						$("label.error").hide();
+						  $(".error").removeClass("error");
+					});
+					
+					$(".close").click(function(e) {
+						$("#addes").trigger('reset');
+						
+						$("label.error").hide();
+						  $(".error").removeClass("error");
+					});
+					$("#apm-addmember-btn").click(function(e) {
+						$('#add-member-modal').modal('show');
+					});
+					
+					$(document).on('click', ".apm-add-proj-edit", function(){
+					//$(".apm-add-proj-edit").click(function(e) {
+						
+						
+						var cells = [];
+					
+						   
+						    $('td', $(this).closest('tr')).each(function() {
+						        cells.push($(this).html());
+						    });
+						console.log("the value is"+cells[0])
+						
+						var optionsAsString = "<option value='" + $(this).closest('tr').attr('id') + "' selected>" + cells[0] + "</option>";
+						$( 'select[name ="memsel"]' ).append( optionsAsString ); 
+						
+						/* var optionsAsString1 = "<option selected>" + cells[1] + "</option>";
+						$( 'select[id ="editmemrole"]' ).append( optionsAsString1 ); */
+						$("#editmemrole option:contains(" + cells[1] + ")").attr('selected', 'selected');
+						//$('#editmemrole').prop('selectedIndex',0);
+						$('#edit-member-modal').modal('show');
+					});
+					
+					$(document).on('click', ".apm-add-esti-edit", function(){	
+                 // $(".apm-add-esti-edit").click(function(e) {
+						
+						    var cells = [];
+					        var id = $(this).closest('tr').attr('id')
+						   
+						    $('td', $(this).closest('tr')).each(function() {
+						        cells.push($(this).html());
+						    });
+						console.log("the value is"+cells[0])
+						$('#estimate_id').attr('value',id );
+						$('#editcomplexity').val(cells[0]);
+						$('#editpoints').val(cells[1]);
+						$('#editefforts').val(cells[2]);
+						
+						$('#edit-estimation-timeline-modal').modal('show');
+					});
+					
+					$("#apm-addmember-btn2").click(function(e) {
+						$('#add-member-modal').modal('show');
+					});
+					$("#apm-addestimates-btn").click(function(e) {
+						$('#add-estimation-timeline-modal').modal('show');
+					});
+					
+					$("#submit").on("click",function(){
+						
+						 
+						var ser = $("#prj").serialize();
+						ser += "&projid" + "=" +{{ project.key.id }} 
+					       
+					$.post( "/apm/project/editproj", ser)
+			  		.done(function( data ) {
+			  		
+			  				console.log("the data is"+data);
+			  				window.location.href = "/apm/project/viewproject?proj_id="+data;
+			  				
+			  		
+			  		});
+					
+					
+				})
+				
+				$("#cancel").on("click",function(){
+						
+						window.location.href = "/apm/project";
+							
+				})
+				
+					$("#addmember").on("click",function(){
+						
+						var e = document.getElementById("memselect");
+						var strUser = e.options[e.selectedIndex].value;
+						console.log("the members are"+strUser)
+						 
+						var r = document.getElementById("memrole");
+						var strRole = r.options[r.selectedIndex].value;
+						console.log("the role are"+strRole) 
+						
+						var projid = {{ project.key.id }}
+						console.log("the projid are"+projid) 
+						
+						if(strUser == "- Select -" || strRole == "- Select -")
+							{
+							 $('#date_error').text("Please select a value.");
+							 event.preventDefault();
+							 event.stopImmediatePropagation();
+							 return false;
+							}
+						else{
+							$('#date_error').text("")
+						
+						var parameters = "role="+strRole+"&projid="+projid+"&userid="+strUser+""
+					    console.log("the param are"+parameters); 
+						
+					$.post( "/apm/project/addmembertoproj", parameters)
+			  		.done(function( data ) {
+			  			console.log("the data is"+data);
+			  			var d = JSON.parse(data);
+			  			
+			  			product_owner='{{product_owner}}';
+			  			//alert(a);
+			  			if(product_owner == 'True')
+			  			{
+			  				$("#memlist").append('<tr id='+d.id+'> <td>'+d.userName+'</td> <td>'+d.userRole+'</td> <td> <i class="fa fa-pencil apm-add-proj-edit" aria-hidden="true" title="Edit"></i> <a href="/apm/project/deleteMember?key='+d.urlsafe+'" data-toggle="modal" data-target="#delete-teammember-modal"><i id="deletemember" class="fa fa-trash apm-add-proj-delete" aria-hidden="true" title="Delete"></i></a> </td> </tr>');
+			  			}
+			  			else
+			  			{
+			  				$("#memlist").append('<tr id='+d.id+'> <td>'+d.userName+'</td> <td>'+d.userRole+'</td> <td> <i class="fa fa-pencil apm-add-proj-edit" aria-hidden="true" title="Edit"></i>  </td> </tr>');
+			  			}
+			  			//$("#memselect option[value='"+d.id+"']").remove();
+			  			$("select#memselect option[value='"+d.userid+"']").remove(); 
+			  			$('#memselect').prop('selectedIndex',0);
+			  			$('#memrole').prop('selectedIndex',0);
+			  			
+			  				
+			  			
+			  		}); 
+					
+						}
+				})
+				
+				
+				$("#editmember").on("click",function(){
+						
+						var e = document.getElementById("editmemselect");
+						var strUser = e.options[e.selectedIndex].value;
+						console.log("the members are"+strUser)
+						 
+						var r = document.getElementById("editmemrole");
+						var strRole = r.options[r.selectedIndex].text;
+						console.log("the role are"+strRole) 
+						
+						
+						var role_id=$('#editmemrole').val();
+						console.log(role_id);
+						
+						var projid = {{ project.key.id }}
+						console.log("the projid are"+projid) 
+						if(strUser === "- Select -" || strRole === "- Select -")
+							{
+							console.log("it is in select");
+							
+							 $('#date_error1').text("Please select a value.");
+							 event.preventDefault();
+							 event.stopImmediatePropagation();
+							 return false;
+							}
+						else{
+						
+							console.log("it is in else");
+							$('#date_error').text("")
+						var parameters = "role="+strRole+"&projid="+projid+"&userid="+strUser+"&role_id="+role_id+""
+					    console.log("the param are"+parameters);   
+					$.post( "/apm/project/editmembertoproj", parameters)
+			  		.done(function( data ) {
+			  			
+			  		if(data == 'false')
+			  			{
+			  				alert('There is only one product owner in this project kindly make other team member as product owner before changing the role of this team member.');
+			  			
+			  			}
+			  		else
+			  			{
+			  				console.log("the data is"+data);
+			  				var d = JSON.parse(data);
+			  			
+			  				$('#' +d.id).remove();
+			  				product_owner='{{product_owner}}';
+			  				//alert(a);
+			  				if(product_owner == 'True')
+			  				{
+			  			 			$("#memlist").append('<tr id='+d.userid+'> <td>'+d.userName+'</td> <td>'+d.userRole+'</td> <td> <i class="fa fa-pencil apm-add-proj-edit" aria-hidden="true" title="Edit"></i> <a href="/apm/project/deleteMember?key='+d.urlsafe+'" data-toggle="modal" data-target="#delete-teammember-modal"><i id="deletemember" class="fa fa-trash apm-add-proj-delete" aria-hidden="true" title="Delete"></i></a> </td> </tr>');
+				  			
+			  				
+			  				}
+			  				else
+			  				{
+			  						$("#memlist").append('<tr id='+d.id+'> <td>'+d.userName+'</td> <td>'+d.userRole+'</td> <td> <i class="fa fa-pencil apm-add-proj-edit" aria-hidden="true" title="Edit"></i>  </td> </tr>');
+				  			}
+			  			
+			  			
+			  			}	
+			  				
+			  			
+			  		}); 
+						}
+					
+				})
+				
+				
+				$(document).on("click",'#addestimates',function(){
+					if (!$('#addes').valid()){
+					    event.preventDefault();
+					    event.stopImmediatePropagation();
+					    return false;
+				 }
+					else
+						{
+						/* var e = document.getElementById("complexity");
+						var strComplexity = e.value;
+						console.log("the members are"+strComplexity)
+						 
+						var r = document.getElementById("points");
+						var strPoints = r.value ;
+						console.log("the role are"+strPoints) 
+						
+						var p = document.getElementById("efforts");
+						var strEfforts = p.value;
+						console.log("the role are"+strEfforts) 
+						
+						//var projid = {{ project.key.id }}
+						var projid=document.getElementById("projid");
+						console.log("the projid are"+projid.value) 
+						
+						var parameters = "complexity="+strComplexity+"&projid="+projid.value+"&points="+strPoints+"&efforts="+strEfforts+""
+					    console.log("the param are"+parameters);
+						 */
+						
+						 var ser = $("#addes").serialize();
+						 
+					       
+						 	$.post( "/apm/project/addestimatetoproj", ser)
+					  		.done(function( data ) {
+					  			
+					  			console.log("the data is"+data);
+				                var d = data ;
+				                var esti = JSON.parse(data);
+				                $('#' +d.id).remove();
+				                //$("#estilist").append('<tr id='+esti.id+'> <td>'+esti.estimationLevel+'</td> <td>'+esti.estimationPoint+'</td> <td>'+esti.estimationHours+'</td> <td> <i class="fa fa-pencil apm-add-esti-edit" aria-hidden="true" title="Edit"></i> <i id="delestimate" class="fa fa-trash apm-add-esti-delete" aria-hidden="true" title="Delete"></i> </td> </tr>');
+					  			$("#addes").trigger('reset');
+				                $("#estilist").append('<tr id='+esti.id+'> <td>'+esti.estimationLevel+'</td> <td>'+esti.estimationPoint+'</td> <td>'+esti.estimationHours+'</td> <td> <i class="fa fa-pencil apm-add-esti-edit" aria-hidden="true" title="Edit"></i> </td> </tr>');
+					  			
+					  				
+					  			
+					  		}); 
+						 
+						 
+					/* 	 
+						var add_estimate = $("#addes").serialize();
+					$.post( "/apm/project/addestimatetoproj", add_estimate )
+			  		.done(function( data ) {
+			  			console.log("the data is"+data);
+		                var d = data ;
+		                var esti = JSON.parse(data);
+		                $('#' +d.id).remove();
+		                //$("#estilist").append('<tr id='+esti.id+'> <td>'+esti.estimationLevel+'</td> <td>'+esti.estimationPoint+'</td> <td>'+esti.estimationHours+'</td> <td> <i class="fa fa-pencil apm-add-esti-edit" aria-hidden="true" title="Edit"></i> <i id="delestimate" class="fa fa-trash apm-add-esti-delete" aria-hidden="true" title="Delete"></i> </td> </tr>');
+			  			$("#addes").trigger('reset');
+		                $("#estilist").append('<tr id='+esti.id+'> <td>'+esti.estimationLevel+'</td> <td>'+esti.estimationPoint+'</td> <td>'+esti.estimationHours+'</td> <td> <i class="fa fa-pencil apm-add-esti-edit" aria-hidden="true" title="Edit"></i> </td> </tr>');
+			  			
+			  			
+			  		});  */
+						}
+					
+				})
+				
+				$(document).on("click","#editestimates",function(){
+					
+					if (!$('#edites').valid()){
+					    event.preventDefault();
+					    event.stopImmediatePropagation();
+					    return false;
+				 }
+					else
+						{
+						
+					/* 	var e = document.getElementById("editcomplexity");
+						var strComplexity = e.value;
+						var strId = e.name;
+						console.log("the members are"+strComplexity)
+						 
+						var r = document.getElementById("editpoints");
+						var strPoints = r.value ;
+						console.log("the role are"+strPoints) 
+						
+						var p = document.getElementById("editefforts");
+						var strEfforts = p.value;
+						console.log("the role are"+strEfforts) 
+						
+						var projid = {{ project.key.id }}
+						console.log("the projid are"+projid) 
+						
+						var parameters = "complexity="+strComplexity+"&projid="+projid+"&points="+strPoints+"&estid="+strId+"&efforts="+strEfforts+""
+					    console.log("the param are"+parameters);    
+					    
+					$.post( "/apm/project/editestimatetoproj", parameters)
+			  		.done(function( data ) {
+			  			console.log("the data is"+data);
+		                var d = data ;
+		                var esti = JSON.parse(data);
+		                $('#'+esti.id).remove();
+		             //   $("#estilist").append('<tr id='+esti.id+'> <td>'+esti.estimationLevel+'</td> <td>'+esti.estimationPoint+'</td> <td>'+esti.estimationHours+'</td> <td> <i class="fa fa-pencil apm-add-esti-edit" aria-hidden="true" title="Edit"></i> <i id="delestimate" class="fa fa-trash apm-add-esti-delete" aria-hidden="true" title="Delete"></i> </td> </tr>');
+		                $("#estilist").append('<tr id='+esti.id+'> <td>'+esti.estimationLevel+'</td> <td>'+esti.estimationPoint+'</td> <td>'+esti.estimationHours+'</td> <td> <i class="fa fa-pencil apm-add-esti-edit" aria-hidden="true" title="Edit"></i>  </td> </tr>');
+			  				
+			  			
+			  		}); */
+			  		
+			  		
+						 var ser1 = $("#edites").serialize();
+						 
+					       
+						 	$.post( "/apm/project/editestimatetoproj", ser1)
+					  		.done(function( data ) {
+					  			
+					  			console.log("the data is"+data);
+				                var d = data ;
+				                var esti = JSON.parse(data);
+				                $('#'+esti.id).remove();
+				             //   $("#estilist").append('<tr id='+esti.id+'> <td>'+esti.estimationLevel+'</td> <td>'+esti.estimationPoint+'</td> <td>'+esti.estimationHours+'</td> <td> <i class="fa fa-pencil apm-add-esti-edit" aria-hidden="true" title="Edit"></i> <i id="delestimate" class="fa fa-trash apm-add-esti-delete" aria-hidden="true" title="Delete"></i> </td> </tr>');
+				                $("#estilist").append('<tr id='+esti.id+'> <td>'+esti.estimationLevel+'</td> <td>'+esti.estimationPoint+'</td> <td>'+esti.estimationHours+'</td> <td> <i class="fa fa-pencil apm-add-esti-edit" aria-hidden="true" title="Edit"></i>  </td> </tr>');
+					  				
+					  				
+					  			
+					  		}); 
+						 
+					
+						}	
+				})
+				
+				    $(document).on('click', ".apm-add-esti-delete", function(){	
+					//$(".apm-add-esti-delete").on("click",function(){
+						
+						console.log("comes here"); 
+						var ser =  $(this).closest('tr').attr('id');
+						console.log("comes here"+ser); 
+						var parameters = "id="+ser+""
+					$.post( "/apm/project/deleteEstimate", parameters)
+			  		.done(function( data ) {
+			  			if (data =="success"){
+			  				
+			  				$("#"+ser).remove() ;
+			  				
+			  			} else {
+			  				
+			  				
+			  			}
+			  		});
+					
+					
+				})
+				/* $(document).on('click', ".apm-add-proj-delete", function(){	
+				//$(".apm-add-proj-delete").on("click",function(){
+						
+						console.log("comes here"); 
+						var ser =  $(this).closest('tr').attr('id');
+						console.log("comes here"+ser); 
+						var parameters = "id="+ser+""
+					$.post( "/project/deleteMember", parameters)
+			  		.done(function( data ) {
+			  			/* if (data =="success"){
+			  				
+			  				$("#"+ser).remove() ;
+			  				$('#memselect').load("/project/viewproject?proj_id=""+{{ project.key.id }} ; #memselect', function(result) {
+			  				});
+			  				
+			  			} else {
+			  				
+			  				
+			  			} */
+						/* var d = JSON.parse(data);
+			  			$("#"+ser).remove() ;
+			  			
+			  			
+			  			$('select#memselect').append($("<option></option>").attr("value",d.userid).text(d.userName+' '+d.last_name)); 
+			  			
+			  				
+			  			
+			  			
+			  		});
+					
+					
+				 }) */
+
+				});
+		</script>
+</body>
+</html>

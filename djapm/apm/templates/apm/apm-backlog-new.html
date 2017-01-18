@@ -1,0 +1,94 @@
+<html>
+<head>
+<script src="/static/apm/js/jquery.js"></script>
+<script>
+
+
+</script>
+</head>
+<body>
+<form action="/apm/project/backlog" method="post">
+	{% csrf_token %} 
+	
+	
+	<input name="projid" id="projid" type="hidden" value="{{project_id}}">
+	
+	<label class="task-label">Sprint</label> <select
+		class="form-control add-task-textbox apm-modal-textbox" name="sprint"
+		id="DDsprint">
+
+		<option value="None">None</option> 
+		{%for i in sprint%} 
+		{%if i.status%}
+
+		<option value={{i.key.urlsafe}}>{{i.name}}</option> 
+		{%endif%}
+		{%endfor%}
+	</select>
+
+<br>
+
+		<label class="task-label">Story Name<font color="red">*</font></label>
+		<input type="text"
+			class="form-control add-task-textbox apm-modal-textbox"
+			name="backlog_name">
+
+<br>
+
+		<label class="task-label">Assign To</label> <select
+			class="form-control add-task-textbox apm-modal-textbox"
+			name="assignee" id="assignee">
+			<option value="None">None</option> 
+			{% for team in team%} 
+			{%if team.status%}
+			<option value="{{team.userid.urlsafe}}">{{team.userid.get.name}}
+				{{team.userid.get.last_name}}</option> 
+				{%endif%} 
+				{%endfor%}
+		</select>
+<br>
+
+
+		<label style="display: none;" class="task-label">Type</label> <select
+			style="display: none;"
+			class="form-control add-task-textbox apm-modal-textbox" name="type">
+			{%for i in type%}
+			<option style="display: none;" value={{i.key.urlsafe}}>{{i.name}}</option>
+			{%endfor%}
+		</select>
+<br>
+
+
+		<label class="task-label">Description<font color="red">*</font></label>
+		<!-- <input type="text" class="form-control add-task-textbox apm-modal-textbox">-->
+		<textarea name="description"
+			class="form-control apm-landing-textbox-reg apm-text-area" rows="4"></textarea>
+
+
+
+<br>
+
+	
+				<label class="task-label">Rough Estimate(In hrs)<font
+					color="red">*</font></label> <input type="text"
+					class="form-control add-task-textbox apm-modal-textbox"
+					name="rough_estimate" id="rough_estimate">
+			<br>
+			
+
+				<label class="task-label">Priority<font color="red">*</font></label>
+				<input type="text"
+					class="form-control add-task-textbox apm-modal-textbox"
+					name="priority" min="1" max="5" maxlength="1"
+					onkeypress="this.value = minmax(this.value, 1, 5)">
+	<br>	
+
+<!-- 
+		<button type="button" class="add-task-btn-modal" data-dismiss="modal"
+			value="Add" name="add_backlogs" id="add_backlogs">Add</button> -->
+		<input type="submit" class="add-task-btn-modal" data-dismiss="modal" value="Add" name="add_backlogs" id="add_backlogs"> 
+
+	
+</form>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>{% block title%}User- Dashboard {% endblock %}</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		
+		<link rel="stylesheet" href="/static/apm/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/apm/css/style.css">
+		<link rel="stylesheet" href="/static/apm/css/sidebar.css">
+		<link rel="stylesheet" href="/static/apm/css/button.css">
+		<link rel="stylesheet" href="/static/apm/css/bootstrap-datepicker.min.css">
+		
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel='shortcut icon' href='/static/apm/img/favicon.ico' type='image/x-icon' />
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<style>
+			.apm-nav-brand-1{
+				padding: 15px!important;
+				font-size: 15px!important;
+				margin: 0!important;
+				padding-left: 8px!important;
+			}
+			.apm-dropdown-projects{
+				margin-left: -48px!important;
+				margin-top: 50px!important;
+				z-index:99999999;
+			}
+			
+		</style>
+			<script>
+		$(document).ready(function(){
+			var url = window.location.href.split(".com/").pop();
+			url = url.split("/")
+			page = url[0];
+			
+		//harshit 
+		var link=$('a[href="/'+page+'"]');
+		$(link[0]).css("color", "#3978BF");
+		if ($(link[0]).hasClass("dontfind")){
+			$(link[0]).parent().addClass('active');
+			$(link[0]).css('color','white');
+		}else {
+			var parentName=$(link[0]).closest(".find");
+			
+			$(parentName[0]).addClass('active');
+			$(parentName[0]).closest('.openlink').click();
+			var click = $(parentName[0]).children('a')[0];
+			$(click).click();
+			//console.log(click);
+		}
+		
+		//harshit ends
+		/*
+		if (page == "dashboard")
+		{
+			$("#dashboard").attr( "class", "active" );
+		}
+		else 
+		if(page == "release" )
+		{
+			$("#project_planning").attr( "class", "active" );
+			$("#release_text").css("color", "#3978BF");
+			
+			
+		}
+		else 
+		if(page == "backlog")
+		{	
+			$("#project_planning").attr( "class", "active" );
+			$("#backlog_text").css("color", "#3978BF");
+		//	$("#collapseOne").attr("aria-expanded","true");
+		}
+		else 
+		if(page == "project")
+		{	
+			$("#project_planning").attr( "class", "active" );
+			$("#project_text").css("color", "#3978BF");
+		//	$("#collapseOne").attr("aria-expanded","true");
+		}
+		else 
+		if(page == "sprint")
+		{	
+			$("#sprint_planning").attr( "class", "active" );
+			$("#sprint_text").css("color", "#3978BF");
+		//	$("#collapseTwo").attr("aria-expanded","true");
+		}
+		else
+		{
+			
+		}*/
+		});
+		
+		</script>
+		
+		{% block header_links%}{% endblock %}
+	</head>
+<body>
+    <nav class="navbar navbar-default no-margin nav-apm">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header fixed-brand">
+                    
+					<!-- Menu Toggle -->
+					<i class="fa fa-bars fa-2x collapse in" data-toggle="collapse" id="menu-toggle-2" aria-hidden="true"></i>
+					
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".apm-navbar" aria-expanded="false" aria-controls="navbar">
+					  <span class="sr-only">Toggle navigation</span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					</button>
+                    <!-- Project Name in dropdown -->
+					<span class="dropdown">
+						<a class="navbar-brand apm-nav-brand-1" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">No Project<span class="caret"></span></a></a>
+						<ul class="dropdown-menu apm-dropdown-projects">
+						    <li><a href="/setsession?project_key={{project.projectid.urlsafe}}"><i class="fa fa-cog"></i>XYZ</a></li>
+						    
+							 <li class="divider"></li>
+							
+							<li><a href="/project">View All Projects</a></li>
+							<li><a href="/apm/project/add">Create New Project</a></li>
+							
+													
+						</ul>
+					</span>
+               
+					
+                </div><!-- navbar-header-->
+ 
+                <div class="collapse navbar-collapse apm-navbar" id="bs-example-navbar-collapse-1">
+                            <!-- <ul class="nav navbar-nav">
+                                <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<i class="fa fa-share-alt"></i> SOCIAL MEDIA
+										<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+										  <li><a href="#"><i class="fa fa-facebook-official"></i> Facebook</a></li>
+										  <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+										  <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+										</ul>
+									  </li>
+									  
+									  
+									  <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<i class="fa fa-sticky-note"></i> PROJECTS
+										<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+										  <li><a href="#"><i class="fa fa-cog"></i> Project 1</a></li>
+										  <li><a href="#"><i class="fa fa-cog"></i> Project 2</a></li>
+										  <li><a href="#"><i class="fa fa-cog"></i> Project 3</a></li>
+										</ul>
+									  </li>
+									  
+									  <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ISSUES
+										<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+										  <li><a href="#"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Issue 1</a></li>
+										  <li><a href="#"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Issue 2</a></li>
+										  <li><a href="#"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Issue 3</a></li>
+										</ul>
+									  </li>
+									  
+                            </ul>
+							 -->
+							
+							
+							<ul class="nav navbar-nav navbar-right nav-desktop">
+									<li class="search-field-box">
+										<i class="fa fa-search search-icon"></i><input type="text" class="form-control search-field" placeholder="Search...">
+									</li>
+									 
+ 									  <li class="dropdown">
+										<a href="#" class="dropdown-toggle user-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										
+										Hi , {{userName}}
+										{%if blob%}
+										<img src="/view_photo?photo_key={{blob}}" class="apm-profile-thumb"> </a>
+										{%else%}
+										<i class="fa fa-user fa-3x"></i></a>
+										{%endif%}
+										<ul class="dropdown-menu multi-level menu-user">
+										{%if approle == "Admin"%}
+										  <li><a href="/admin/dashboard"><i class="fa fa-refresh"></i>Switch Role</a></li>
+										  {%endif%}
+										  <li><a href="/profile"><i class="fa fa-user"></i> Profile</a></li>
+									      <li class="dropdown-submenu">
+													<a href="#"><i class="fa fa-caret-left arrow-left"></i><i class="fa fa-cog"></i> Settings</a>
+													<ul class="dropdown-menu submenu-list">
+													  <li><a href="#"><i class="fa fa-bell"></i> Notifications</a></li>
+													  <li><a href="#"><i class="fa fa-link"></i> Linked Accounts</a></li>
+													  <li><a href="#"><i class="fa fa-trash"></i> Clear History</a></li>
+													  <li><a href="#"><i class="fa fa-share-square"></i> Share Query</a></li>
+													  <li><a href="#"><i class="fa fa-certificate"></i> Assistance</a></li>
+													</ul>
+										  </li>
+										  <li><a href="#"><i class="fa fa-question-circle"></i> Help</a></li>
+										  <li role="separator" class="divider"></li>
+										  <li><a href="/apm/user/signout"><i class="fa fa-sign-out"></i> Logout</a></li>
+										</ul>
+									  </li>
+									</ul>
+							
+                </div><!-- bs-example-navbar-collapse-1 -->
+    </nav>
+	
+	
+    <div id="wrapper">
+        <!-- Sidebar -->
+        
+        
+      
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            {%for side in sidebars%}
+						
+							{%if side.grouper%}
+<li class="find">
+	<a  class="sidebar-main-list-name pro-planning-link openlink" data-toggle="collapse" data-parent="" href="#{{side.grouper|cut:' '|lower}}">{%ifequal side.grouper 'Sprint Planning'%}<i class="fa fa-circle-o-notch"></i>{{side.grouper}}{%else%}<i class="fa fa-list"></i>{{side.grouper}}{%endifequal%} <span class="caret sidebar-caret"></span></a>
+		<div id="{{side.grouper|cut:' '|lower}}" class="panel-collapse collapse">
+			<div class="panel-body sidebar-list-panel">
+				<ul class="sidebar-list" style="display:block!important;" >						
+								
+									{%for sides in side.list%}
+										{%ifnotequal sides.url "project"%}
+									<li  class="">
+										<a href="/{{sides.url}}" class="sidebar-list-sub-item" >{{sides.permission}}</a>
+									</li>
+										{%endifnotequal %}
+										
+									{%endfor%}
+				</ul>
+			</div>
+		</div>
+</li>
+							{%else%}
+								{%for sides in side.list%}
+								
+									<li id="" class="">
+										<a href="/{{sides.url}}" class="sidebar-main-list-name dontfind"><i class="{{sides.icon}} side-font-icons"></i> {{sides.permission}}</a>
+									</li>
+									
+								{%endfor%}
+							{%endif%}
+							
+						{%endfor%}
+						          </ul>
+        </div><!-- /#sidebar-wrapper -->
+ <!--  			
+					<li id="dashboard" class="">
+						<a href="/dashboard" class="sidebar-main-list-name"><i class="fa fa-th-large side-font-icons"></i> Dashboard</a>
+						
+					</li>
+					{%for permission in permissions%}
+        				{% ifequal permission.project session.current_project%}
+        					{%for permit in permission.permit_for%}
+        			
+        			
+        			{%ifequal permit.get.url "project"%}
+			<li id="project_planning" class="">
+						<a id=a_collapseOne class="sidebar-main-list-name pro-planning-link" data-toggle="collapse" data-parent="" href="#collapseOne"><i class="fa fa-list"></i> Project Planning <span class="caret sidebar-caret"></span></a>
+
+						<div id="collapseOne" class="panel-collapse collapse">
+							<div class="panel-body sidebar-list-panel">
+								<ul class="sidebar-list" style="display:block!important;" id="project_planning_ul">
+									<!-- <li id="project" class="">
+										<a href="/project" class="sidebar-list-sub-item" id="project_text">Projects</a>
+									</li> 
+									<li id="release" class="">
+										<a href="/release" class="sidebar-list-sub-item" id="release_text">Release</a>
+									</li>
+									<li  id="backlog" class="">
+										<a href="/backlog" class="sidebar-list-sub-item" id="backlog_text">Backlog</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+
+					{%endifequal%}
+					{%ifequal permit.get.url "sprint"%}
+
+					<li id="sprint_planning" class="">
+
+						<a class="sidebar-main-list-name pro-planning-link" data-toggle="collapse" data-parent="" href="#collapseTwo"><i class="fa fa-list"></i> Sprint Planning <span class="caret sidebar-caret"></span></a>
+						<div id="collapseTwo" class="panel-collapse collapse">
+							<div class="panel-body sidebar-list-panel">
+								<ul class="sidebar-list" style="display:block!important;">
+									<li  id="" class="">
+										<a href="#" class="sidebar-list-sub-item">Effort Estimation</a>
+									</li>
+									<li id="sprint" class="">
+										<a href="/sprint?key=ag1zfmFwbS1ldGVybnVzchQLEgdQcm9qZWN0GICAgICWpZILDA" class="sidebar-list-sub-item" id="sprint_text">Sprint Items</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+
+					{%endifequal%}
+					{%ifequal permit.get.url "document"%}
+					<li id="" class="">
+						<a href="#" class="sidebar-main-list-name"><i class="fa fa-file-text side-font-icons"></i> Document Management</a>
+					</li>
+					{%endifequal%}
+					{%ifequal permit.get.url "reports"%}
+					<li id="" class="">
+						<a href="#" class="sidebar-main-list-name"><i class="fa fa-pie-chart side-font-icons"></i> Reports</a>
+					</li>
+					{%endifequal%}
+					{%ifequal permit.get.url "alerts"%}
+		
+					
+					<li id="" class="">
+
+						<a href="#" class="sidebar-main-list-name"><i class="fa fa-bell side-font-icons"></i> Alerts & Notifications</a>
+					</li>
+					{%endifequal%}
+					{%endfor%}
+        	{%endifequal%}
+        {%endfor%}
+        -->
+		
+			{% block sidebar%}
+						
+						
+			{% endblock %}
+               
+  
+		
+		{%block content%}
+		
+     
+        
+		{%endblock%}
+	
+		
+		
+		
+    </div>
+    <!-- /#wrapper -->
+  
+		<script src="/static/apm/js/jquery.js"></script>
+		<script src="/static/apm/js/bootstrap.min.js"></script>
+		<script src="/static/apm/js/side-menu.js"></script>
+		<script src="/static/apm/js/bootstrap-datepicker.min.js"></script>
+		<!-- <script src="/static/apm/js/main.js"></script> -->
+		<script src="/static/apm/js/jquery.validate.min.js"></script>
+		
+		<!-- <script src="/static/apm/js/draggable.js"></script> -->
+</body>
+</html>

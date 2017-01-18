@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>APM - Eternus Solutions Pvt. Ltd.</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="/static/apm/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/apm/css/style.css">
+		<link rel="stylesheet" href="/static/apm/css/sidebar.css">
+		<link rel="stylesheet" href="/static/apm/css/button.css">
+		<link rel="stylesheet" href="/static/apm/css/alert.css">
+		
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
+		<script src="/static/apm/js/jquery.js"></script>
+		<script src="/static/apm/js/bootstrap.min.js"></script>
+		<script src="/static/apm/js/side-menu.js"></script>
+	
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		
+		<script src="/static/apm/js/jquery.validate.min.js"></script>
+		
+		<script src="/static/apm/js/company_registration.js"></script>
+		
+<!-- 		<script src="/static/apm/js/alert.js"></script> -->
+		<style>
+			.error{
+			color:red !important;
+			}
+			
+			#submit_form:focus{
+			border: 5px;
+			}
+			
+		</style>
+				<style>
+		  .apm-landing-logo-center{
+		   		text-align:center;
+		  }
+		  .apm-landing-logo-center img{
+		   		width:150px;
+		  }
+		  
+		 </style>
+	
+	</head>
+<body class="apm-landing-body">
+		<!-- ALERT BOX - Insert this code just below the body tag -->
+	<div class="alert alert-info apm-alert-box">
+	  <a href="#" class="close alert-close" data-dismiss="alert" aria-label="close">&times;</a>
+		Login Failed !!! Please check credentials and try again.
+	</div>
+<!-- ALERT BOX ENDS -->
+	<section class="landing-top-section">
+		
+			<div class="landing-top-left-box">
+				<img src="/static/apm/img/eternus2.png">
+			</div>
+		
+		
+			<div class="landing-top-right-box">
+				<form class="form-inline" role="form" id="login_form" method="post" action="user/signin">
+				{% csrf_token %}
+				  <div class="form-group apm-landing-form-grp">
+					<label for="email">E-Mail</label>
+					<input type="email" class="form-control apm-landing-textbox" name="username" >
+				  </div>
+				  <div class="form-group apm-landing-form-grp">
+					<label for="pwd">Password</label>
+					<input type="password" class="form-control apm-landing-textbox" name="password">
+				  </div>
+				 
+				  <button type="submit" id="btnLgn" class="apm-landing-login-btn">Login</button>
+				
+				  <!-- Forgot Password Link -->
+				  <a href="/forgot" title="Forgot Password?"><i class="fa fa-question-circle apm-landing-forgt-pass-link"></i></a>
+				   </form>
+				
+			</div>
+		
+	</section>
+	
+	<section class="apm-landing-middle-box">
+		
+			<div class="apm-landing-logo-center">
+		   		<img src="/static/apm/img/logo-black.png">
+		    </div>
+		
+		<p class="apm-landing-para">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+		</p>	
+	
+		<div class="container apm-landing-container">
+			
+			<!-- Left Box -->
+			<div class="col-md-6 apm-landing-left-box">
+				<div class="row">
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-8">
+						<img src="/static/apm/img/pro.png" class="img-responsive">
+					</div>	
+					<div class="col-md-2">
+					</div>
+				</div>
+				<h3 class="apm-left-img-heading">Get lots more with APM...</h3>
+			</div>
+			<!-- Left Box ENDS -->
+			
+			<!-- Right Box -->
+			<div class="col-md-6 apm-landing-right-box">
+				<div class="row">
+					<div class="col-md-2 col-sm-2">
+					</div>
+					<div class="col-md-8 col-sm-8">
+						<h4 class="apm-landing-reg-comp-label">Register Your Company</h4>
+					
+						<form role="form" id="signup_user_35" method='post' action='company/register'>
+						{% csrf_token %}
+						  <div class="form-group">
+							<label class="apm-landing-reg-label">Company Name<font color="red">*</font></label>
+							<input type="text" class="form-control apm-landing-textbox-reg" name="company_name">
+						  </div>
+						  <div class="form-group">
+							<label class="apm-landing-reg-label">Sub-domain Name<font color="red">*</font></label>
+							<input id ='domain_name' type="text" class="form-control apm-landing-textbox-reg" name="company_domain">
+						  </div>
+						  <div class="form-group">
+							<label class="apm-landing-reg-label">Email Address<font color="red">*</font></label>
+							<input type="text" class="form-control apm-landing-textbox-reg" name="email">
+						  </div>
+						  <div class="error" id="user-error"></div>
+						   {% for role in roles %}
+								<input type="hidden" value="{{role.key.urlsafe}}" name="role">
+						   {%endfor%}
+						  
+						  <input type="submit"   class="apm-landing-reg-btn" id="submit_form_35"/>
+						</form>
+					</div>	
+					<div class="col-md-2 col-sm-2">
+					</div>
+				</div>
+				
+			</div>
+			<!-- Right Box ENDS -->
+			
+		</div>
+	</section>
+		
+</body>
+</html>
+

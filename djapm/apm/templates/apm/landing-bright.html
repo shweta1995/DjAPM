@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>APM Landing</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
+		<link rel="stylesheet" href="/static/apm/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/apm/css/style.css">
+		<link rel="stylesheet" href="/static/apm/css/button.css">
+		<link rel="stylesheet" href="/static/apm/css/bootstrap-datepicker.min.css">
+
+		
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Questrial">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Playfair Display SC">
+		
+		
+		
+		
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
+		<style>
+			body{
+				overflow-x:hidden;
+			}
+			.landing-left{
+				background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/static/apm/img/b.png');
+				background-size:cover;
+				height:100vh;
+				background-repeat:no-repeat;
+				padding:0;
+				position: relative;
+				padding: 6em;
+			}	
+			.landing-right{
+				padding:0;
+				background:#f3f3f3;
+				height:100vh;
+				position: relative;
+			}
+			.left-main-box{
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			.right-main-box{
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 100%;
+			}
+			.left-container{
+				text-align: center;
+				margin-left: -6.5em;
+			}
+			.left-container h1{
+				font-family: Questrial;
+				color: #fff;
+				font-size: 3em;
+				margin-top: 45px;
+				font-weight:300;
+			}
+			.left-container p{
+				font-family: Roboto;
+				color: #fff;
+				font-size: 16px;				
+				font-weight:300;
+				width:80%;
+				margin:0 auto;
+				margin-top: 8px;
+				text-align:center;
+			}
+			.right-container {
+				text-align: center;
+				margin-left: -6.5em;
+				margin: 0 auto;
+				width: 45%;
+			}
+			.landing-textbox{
+				background:transparent!important;
+				color:#000!important;
+			}
+			.landing-textbox::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+			  color: grey;
+			}
+			.landing-textbox::-moz-placeholder { /* Firefox 19+ */
+			  color: grey;
+			}
+			.landing-textbox:-ms-input-placeholder { /* IE 10+ */
+			  color: grey;
+			}
+			.landing-textbox:-moz-placeholder { /* Firefox 18- */
+			  color: grey;
+			}
+			.landing-login-btn{
+				color: #fff!important;
+				text-decoration: none;
+				border: none!important;
+				border-radius: 2px;
+				font-weight: 400;
+				font-size: 14px;
+				background: #00BCD4;
+				padding: 10px 22px;
+				transition: .3s ease-out;
+				text-transform: uppercase;
+				box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+				width: 100%;
+			}
+			.landing-login-btn:hover {
+				box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
+			}
+			.landing-forgot-link{
+				float:right;
+				color:#00BCD4!important;
+				font-weight:500;
+				margin-top:10px;
+				font-size:13px;
+			}
+			.social-login-box ul{
+				list-style-type:none;
+				padding:0;				
+			}
+			.social-login-box ul li{
+				display:inline;
+				margin:0 5px;
+			}
+			.social-login-box ul li a{
+				text-decoration:none!important;
+			}
+			.social-login-box{
+				color:#4b4b4b;
+				margin-top: 50px;
+				font-weight:500;
+			}
+			.landing-signup-box{
+				color:#4b4b4b;
+				margin-top:20px;
+				font-weight:500;
+			}
+			.landing-signup-link{
+				color:#00BCD4!important;
+				font-weight:500;
+				margin-top:10px;
+				font-size:13px;
+			}
+		</style>
+		
+	</head>
+	<body>
+	
+		<div class="row">
+			<div class="col-md-6 landing-left">
+				<div class="left-main-box">
+					<div class="left-container">
+						<img src="/static/apm/img/eternus2.png">
+						<h1>Agile Project Management</h1>
+						
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+						</p>
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 landing-right">
+				<div class="right-main-box">
+					<div class="right-container">
+						<form action="/apm/user/signin" method="post">
+						{% csrf_token %}
+							<div class="form-group site-form-group">
+							    <input type="text" name="username" class="form-control site-textbox landing-textbox" placeholder="Username">
+							</div>
+							<div class="form-group site-form-group">
+							    <input type="password" name="password" class="form-control site-textbox landing-textbox" placeholder="Password">
+							</div>
+							
+							<button type="submit" id="btnlogin" class="landing-login-btn" data-dismiss="modal">Login</button>							
+						</form>
+						
+						<a href="" class="landing-forgot-link">Forgot Password?</a>
+						
+						<br/>
+						
+						<div class="social-login-box">							
+							<ul>
+								<li>Or Login with:</li>
+								<li>
+									<a href="" alt="Facebook" title="Facebook">
+										<img src="/static/apm/img/facebook.png" />
+									</a>
+								</li>
+								<li>
+									<a href="" alt="Google Plus" title="Google Plus">
+										<img src="/static/apm/img/googleplus.png" />
+									</a>
+								</li>
+								<li>
+									<a href="" alt="Twitter" title="Twitter">
+										<img src="/static/apm/img/twitter.png" />
+									</a>
+								</li>
+							</ul>
+						</div>
+						
+						<div class="landing-signup-box">
+							Don't have an account? <a href="" class="landing-signup-link">Sign Up</a>
+						</div>
+						
+					</div>
+				</div>			
+			</div>
+			
+		</div>
+		
+		
+		<script src="/static/apm/js/jquery.js"></script>
+		<script src="/static/apm/js/bootstrap.min.js"></script>
+		<script src="/static/apm/js/bootstrap-datepicker.min.js"></script>
+		<script src="/static/apm/js/main.js"></script>
+		<script src="/static/apm/js/button.js"></script>
+		
+		<script>
+				$(document).ready(function(){
+					
+				});
+		</script>
+	</body>
+</html>
